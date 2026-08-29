@@ -1,0 +1,10 @@
+data/*
+!data/unit_costs/
+!data/unit_costs/*.csv
+.Rhistory
+.RData
+.Ruserdata
+.Rproj.user/
+README.html
+.DS_Store
+Thumbs.db

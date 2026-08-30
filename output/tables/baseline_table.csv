@@ -1,0 +1,3 @@
+"intervention_arm","n","mean_age","pct_female","mean_charlson","mean_utility_base"
+"Usual care",212,82.6981132075472,64.1509433962264,1.56132075471698,0.498941520467836
+"Geriatrician intervention",205,82.8975609756097,60,1.55121951219512,0.524981481481481

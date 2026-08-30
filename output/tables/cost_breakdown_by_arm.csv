@@ -1,0 +1,3 @@
+"intervention_arm","n","mean_inpatient_cost","mean_outpatient_cost","mean_social_care_cost","mean_intervention_cost","mean_prim_tert_cost","mean_total_cost"
+"Usual care",212,2308.70566037736,651.089198113208,965.956947169811,0,198.891509433962,4124.64331509434
+"Geriatrician intervention",205,2795.44917073171,736.303024390244,1186.05186536585,24.4426178861789,187.858195121951,4930.10487349593

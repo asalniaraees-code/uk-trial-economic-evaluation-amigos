@@ -1,0 +1,66 @@
+"variable","pct_missing"
+"days_to_death",0.937649880095923
+"po_eq5d_anx",0.302158273381295
+"po_eq5d_pain",0.275779376498801
+"po_eq5d_act",0.26378896882494
+"po_stairs_b",0.254196642685851
+"po_eq5d_mob",0.251798561151079
+"po_eq5d_sc",0.251798561151079
+"po_bowels_b",0.251798561151079
+"po_feed_b",0.251798561151079
+"po_groom_b",0.249400479616307
+"po_bath_b",0.249400479616307
+"po_toilet_b",0.249400479616307
+"po_bladd_b",0.249400479616307
+"po_dress_b",0.249400479616307
+"po_mob_b",0.249400479616307
+"po_residence",0.247002398081535
+"pi_eq5d_anx",0.189448441247002
+"pi_eq5d_pain",0.134292565947242
+"pi_bowels_b",0.105515587529976
+"pi_stairs_b",0.100719424460432
+"pi_bladd_b",0.0959232613908873
+"pi_bath_b",0.079136690647482
+"pi_toilet_b",0.079136690647482
+"pi_dress_b",0.079136690647482
+"pi_feed_b",0.0767386091127098
+"pi_eq5d_act",0.0719424460431655
+"pi_groom_b (_b = Barthel ADL items)",0.0695443645083933
+"pi_trans_b",0.0695443645083933
+"pi_mob_b",0.0671462829736211
+"pi_eq5d_sc",0.0623501199040767
+"pi_eq5d_mob",0.052757793764988
+"patient_id",0
+"age",0
+"sex",0
+"place",0
+"placecode",0
+"pi_pres_breath (shortness of breath)",0
+"pi_pres_wl (weight loss)",0
+"pi_pres_fall (falls)",0
+"pi_pres_mob (reduced mobility)",0
+"pi_pres_cont (new or increased continence disorder)",0
+"pi_pres_sore (current pressure sores)",0
+"pi_pres_dehy (dehydration)",0
+"pi_pres_ci (cognitive impairment)",0
+"pi_mmse1",0
+"pi_mmse2",0
+"pi_mmse3",0
+"pi_mmse4",0
+"pi_mmse5",0
+"pi_mmse6",0
+"pi_mmse7",0
+"pi_mmse8",0
+"pi_mmse9",0
+"pi_mmse10",0
+"pi_mmse11",0
+"charlson_score",0
+"isar1",0
+"isar2",0
+"isar3",0
+"isar4",0
+"isar5",0
+"isar6",0
+"pi_residence",0
+"dead_at_follow_up",0
+"intervention_arm",0

@@ -1,3 +1,50 @@
+# UK Trial-Based Economic Evaluation: AMIGOS
+
+## Overview
+
+This project conducts a trial-based economic evaluation using publicly available
+patient-level data from the AMIGOS randomised controlled trial, which compared a
+geriatrician-led case management intervention against usual care for older people
+discharged from an acute medical unit.
+
+## Objective
+
+To develop practical experience analysing UK clinical trial data, including
+healthcare resource use, costs, EQ-5D, and QALYs, and to produce a reproducible
+cost-effectiveness analysis.
+
+## Data
+
+AMIGOS randomised controlled trial (n = 417).
+
+The original dataset is not redistributed in this repository, as it contains
+patient-level data. It is available from the original data repository, subject
+to its terms of use.
+
+## Methods
+
+- Data cleaning and quality assessment
+- Patient-level resource-use analysis
+- UK EQ-5D-3L utility estimation (TTO value set, Dolan 1997)
+- QALY calculation (area-under-the-curve method)
+- Cost analysis using HRG- and treatment-function-code-level unit costs from the
+  NHS National Schedule of Reference Costs 2011-12 (matching the trial's HRG4-era coding)
+- Incremental cost-effectiveness analysis (unadjusted and baseline-adjusted)
+- Uncertainty analysis via non-parametric bootstrap (cost-effectiveness plane, CEAC)
+
+## Software
+
+R / RStudio. Key packages: readxl, dplyr, eq5d, ggplot2, boot.
+
+## Project structure
+
+```
+R/            - analysis scripts (01_import_cleaning -> 04_analysis)
+data/         - raw data (not tracked) and unit cost lookups (tracked)
+output/       - generated tables and figures
+docs/         - preliminary report
+```
+
 ## Results
 
 **Baseline (n = 417):** the two arms were reasonably balanced on age (82.7 vs 82.9) and
@@ -34,3 +81,7 @@ curve stays below ~6% probability of cost-effectiveness across £0-£50,000/QALY
 - Intervention delivery time uses a single fixed hourly wage rate rather than per-patient variation.
 - This is an independent, self-directed replication for methods practice, not a validated
   reproduction of the original trial's published economic evaluation.
+
+## Status
+
+Preliminary exploratory analysis, complete.

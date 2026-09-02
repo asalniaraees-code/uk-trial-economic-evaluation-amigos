@@ -16,10 +16,15 @@ clinical          <- readRDS("data/derived/clinical_clean.rds")
 
 # ------------------------------------------------------------------------
 # 1. INPATIENT / DAYCASE COSTS
-#    HRG codes need a unit cost lookup - source this from the relevant
-#    year's NHS National Schedule of NHS Costs (PbR tariff) and save it as
-#    data/unit_costs/hrg_tariff.csv with columns: hrg_code, unit_cost
-#    Placeholder lookup shown below - REPLACE with the real tariff file.
+#    HRG codes need a unit cost lookup, sourced from the NHS National
+#    Schedule of Reference Costs 2011-12 (data/unit_costs/hrg_tariff.csv),
+#    with SEPARATE unit costs for daycase vs inpatient settings.
+#
+#    Using one blended "Total" rate for every episode overcosts daycase
+#    admissions (which are genuinely cheaper) at the same rate as full
+#    inpatient stays. EPIDUR (episode duration) == 0 identifies a daycase
+#    episode - use the daycase-specific rate for those, and the combined
+#    elective/non-elective inpatient rate otherwise.
 # ------------------------------------------------------------------------
 hrg_tariff_path <- "data/unit_costs/hrg_tariff.csv"
 
@@ -28,7 +33,8 @@ if (file.exists(hrg_tariff_path)) {
 } else {
   warning("HRG tariff file not found at ", hrg_tariff_path,
           " - inpatient costs will be NA until you add it.")
-  hrg_tariff <- tibble(hrg_code = character(), unit_cost = numeric())
+  hrg_tariff <- tibble(hrg_code = character(), daycase_unit_cost = numeric(),
+                        inpatient_unit_cost = numeric())
 }
 
 # Force to character on both sides too, for the same reason as tfc_code
@@ -38,8 +44,11 @@ hrg_tariff <- hrg_tariff %>% mutate(hrg_code = as.character(hrg_code))
 
 inpatient_costed <- inpatient %>%
   left_join(hrg_tariff, by = "hrg_code") %>%
+  mutate(
+    episode_cost = if_else(epidur == 0, daycase_unit_cost, inpatient_unit_cost)
+  ) %>%
   group_by(patient_id) %>%
-  summarise(inpatient_cost = sum(unit_cost, na.rm = TRUE), .groups = "drop")
+  summarise(inpatient_cost = sum(episode_cost, na.rm = TRUE), .groups = "drop")
 
 # ------------------------------------------------------------------------
 # 2. OUTPATIENT COSTS
@@ -90,9 +99,12 @@ social_care_costed <- social_care %>%
 #    unit cost from the current PSSRU Unit Costs of Health & Social Care.
 #    Replace GERIATRICIAN_HOURLY_RATE with the value you decide to use.
 # ------------------------------------------------------------------------
-GERIATRICIAN_HOURLY_RATE <- 15.5     # PSSRU 2012 consultant medical hourly wage, per source data's Assumptions column
-inpatient %>% distinct(hrg_code) %>% arrange(hrg_code)
-outpatient %>% distinct(tfc_code, attendance_type) %>% arrange(tfc_code)
+GERIATRICIAN_HOURLY_RATE <- 132   # PSSRU 2012 consultant medical hourly wage (confirmed against
+                                   # the published AMIGOS trial paper: mean 1.577 hrs/patient x £132
+                                   # = £208, matching the paper's reported mean intervention cost
+                                   # exactly. The "15.5" in the Assumptions column is a PSSRU
+                                   # table/reference number, not the wage rate itself.
+
 intervention_costed <- intervention_time %>%
   mutate(
     total_hours = rowSums(across(starts_with("hrs_")), na.rm = TRUE),
